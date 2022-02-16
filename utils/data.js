@@ -175,12 +175,13 @@ const thoughts = [];
 const reactions = [];
 
 // Fills arrays
-for (let i = 0; i < 300; i++) {
-  if (i < 25) {
+for (let i = 0; i < 150; i++) {
+  if (i < 12) {
+        emails.push(casual.email)
+
     usernames.push(casual.username)
-    emails.push(casual.email)
   }
-  if (i < 100) thoughts.push(casual.sentences(n = 2))
+  if (i < 75) thoughts.push(casual.sentences(n = 2))
   reactions.push(casual.short_description)
 }
 
