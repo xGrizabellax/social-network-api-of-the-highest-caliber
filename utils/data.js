@@ -165,20 +165,22 @@
 
 
 
+// Data faker
 const casual = require('casual');
 
+// Empty arrays to be filled
 const usernames = [];
 const emails = [];
 const thoughts = [];
 const reactions = [];
 
-for (let i = 0; i < 150; i++) {
-  if (i < 12) {
-        emails.push(casual.email)
-
+// Fills arrays
+for (let i = 0; i < 300; i++) {
+  if (i < 25) {
     usernames.push(casual.username)
+    emails.push(casual.email)
   }
-  if (i < 75) thoughts.push(casual.sentences(n = 2))
+  if (i < 100) thoughts.push(casual.sentences(n = 2))
   reactions.push(casual.short_description)
 }
 
