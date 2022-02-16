@@ -108,15 +108,10 @@ connection.once('open', async () => {
   // Drop existing thoughts
   await Thought.deleteMany({});
 
-  // Create an empty array to hold users
   const users = [];
-
-  // Create an empty array to hold thoughts
   const thoughts = [];
 
-  // Create an empty array to hold reactions
 
-  // Setting up users
   while (users.length < 25) {
     const username = getUsername();
     const email = getEmail();
@@ -126,10 +121,8 @@ connection.once('open', async () => {
     })
   }
 
-  // Add users to the collection
   await User.collection.insertMany(users)
 
-  // Setting up thoughts
   while (thoughts.length < 100) {
     const username = getRandomArrItem(users).username;
     const thoughtText = getThought();
@@ -139,10 +132,8 @@ connection.once('open', async () => {
     })
   }
 
-  // Add thoughts to the collection
   await Thought.collection.insertMany(thoughts)
 
-  // Update users with thoughts and friends
   for (let i = 0; i < 100; i++) {
     const thought = thoughts[i];
     await User.collection.findOneAndUpdate(

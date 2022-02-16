@@ -10,15 +10,14 @@ const thoughtCount = async () =>
 
 module.exports = {
 
-
   getThoughts(req, res) {
     Thought.find()
       .then(async (thoughts) => {
-        const thoughtObj = {
+        const allThoughts = {
           thoughtCount: await thoughtCount(),
           thoughts
         };
-        return res.json(thoughtObj);
+        return res.json(allThoughts);
       })
       .catch((err) => res.status(500).json(err));
   },
@@ -29,7 +28,7 @@ module.exports = {
       .select('-__v')
       .then((thought) =>
         !thought
-          ? res.status(404).json({ message: 'No user with that ID' })
+          ? res.status(404).json({ message: 'No user found with this ID' })
           : res.json(thought))
       .catch((err) => res.status.json(err))
   },
@@ -47,14 +46,13 @@ module.exports = {
       })
       .then((user) =>
         !user
-          ? res.status(404).json({ message: 'Thought thunk, but found no user with that username' })
-          : res.json('Created the thought 🧠'))
+          ? res.status(404).json({ message: 'No user found with this ID' })
+          : res.json('Thought created!'))
       .catch((err) => {
         console.log(err);
         res.status(500).json(err);
       })
   },
-
 
   updateThought(req, res) {
     Thought.findOneAndUpdate(
@@ -63,20 +61,21 @@ module.exports = {
       { new: true })
       .then((thought) =>
         !thought
-          ? res.status(404).json({ message: 'No thought with this ID' })
+          ? res.status(404).json({ message: 'No thought found with this ID' })
           : res.json(thought))
       .catch((err) => res.status(500).json(err));
   },
-
 
   deleteThought(req, res) {
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
       .then((thought) =>
         !thought
-          ? res.status(404).json({ message: 'No thought found with that ID' })
+          ? res.status(404).json({ message: 'No thought found with this ID' })
           : res.json(thought))
       .catch((err) => res.status(500).json(err))
   },
+
+
 
 
   addReaction(req, res) {
